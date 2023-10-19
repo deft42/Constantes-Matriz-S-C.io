@@ -1,0 +1,823 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Constantes, Matrices y Switch / Case.</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9a4ba569-b3ea-4469-96dc-e781beda5644" class="page sans"><header><h1 class="page-title">Constantes, Matrices y Switch / Case.</h1><p class="page-description"></p></header><div class="page-body"><h1 id="458e1b6d-06c9-446f-85c8-311ce999c5fe" class="">Definición de constante.</h1><p id="7b0f9659-10e7-4881-ab3f-6e8dc6653bf4" class="">Las constantes son identificadores (nombres) que representan valores que <strong>no pueden cambiar </strong>durante la ejecución del script. A diferencia de las variables, las constantes no pueden cambiar su valor una vez que se les ha asignado. <strong>Son útiles para almacenar valores que no deben modificarse</strong> a lo largo del programa y <strong>se utilizan para mejorar la legibilidad y mantenibilidad del código.</strong></p><p id="1a9a807b-e79f-4266-b81b-7634772bd600" class="">
+</p><h3 id="e0db60a2-99f7-43fa-a100-a58b093e6d68" class="">Sintaxis básica.</h3><pre id="99bbf7f9-7adc-4e8a-af77-65dff6f90f23" class="code"><code>// Las constantes asi como en Javascript tienen su 
+// propia palabra reservada. En este caso es la palabra
+// &quot;define&quot;. 
+
+//Las constantes estan compuestas por 2 parametros
+				// El nombre     // Valor
+define(&quot;NOMBRE_CONSTANTE&quot;, &quot;valor&quot;);
+
+// El nombre puede ser cualquiera que nosotros queramos poner
+// El valor ingresado puede contener ya sea tipo numerico, 
+// flotante, entero o caracter.</code></pre><h3 id="eae065c4-3d0b-43bd-9904-c70f0406a373" class=""><strong>Ejemplo de sintaxis:</strong></h3><pre id="1578852b-208a-4365-821a-66b5a6da5ce3" class="code"><code>// EJEMPLO PARA CONECTAR A UNA BASE DE DATOS
+define(&quot;DB_HOST&quot;, &quot;localhost&quot;);
+define(&quot;DB_USUARIO&quot;, &quot;usuario&quot;);
+define(&quot;DB_CONTRASEÑA&quot;, &quot;contraseña&quot;);
+define(&quot;DB_NOMBRE&quot;, &quot;basededatos&quot;);</code></pre><pre id="a72d33fe-9bca-4998-9917-0d20ead5de2e" class="code"><code>// EJEMPLO PARA DEFINIR LA CONSTANTE &quot;PI&quot;
+define(&quot;PI&quot;, 3.14159);
+echo &quot;El valor de PI es: &quot; . PI;</code></pre><pre id="f7a8eeba-1f82-4b22-8191-cae543d0dfb2" class="code"><code>// EJEMPLO DONDE DEFINIMOS LOS DIAS.
+define(&quot;LUNES&quot;, &quot;Lunes&quot;);
+define(&quot;MARTES&quot;, &quot;Martes&quot;);
+define(&quot;MIERCOLES&quot;, &quot;Miércoles&quot;);
+define(&quot;JUEVES&quot;, &quot;Jueves&quot;);
+define(&quot;VIERNES&quot;, &quot;Viernes&quot;);</code></pre><h3 id="2ff1ad39-051d-4cd3-92e8-cad2faba0609" class="">Ejemplo practico</h3><pre id="23fe0488-0126-4c73-8414-2a401b45615a" class="code"><code>// EJEMPLO PRACTICO EN DONDE DETERMINAMOS LA CONVERSION DE TEMPERATURAS
+&lt;?php
+// Definimos las constantes a utilizar
+// factor de conversión representa el valor numérico
+// o la proporción que se utiliza para relacionar 
+// una unidad de medida con otra
+define(&quot;FACTOR_CONVERSION&quot;, 9/5);
+// Es la constante 32 en la fórmula. Representa la 
+// diferencia de temperatura entre el punto de congelación
+// del agua en grados Fahrenheit (32°F) y el punto de congelación
+// del agua en grados Celsius (0°C).
+define(&quot;OFFSET_CONVERSION&quot;, 32);
+
+// Declaramos la variable que va a contener nuestro valor en
+// en temperatura Celcius ingresada por el usuario.
+$temperaturaCelsius = 25;
+
+// Definimos la variable que va a contener la operacion y resultado 
+// 25 x (9/5 + 32)
+$temperaturaFahrenheit = $temperaturaCelsius * FACTOR_CONVERSION + OFFSET_CONVERSION;
+
+// Se imprime el resultado en pantalla de la operacion pasada.
+echo &quot;$temperaturaCelsius °C es igual a $temperaturaFahrenheit °F&quot;;
+?&gt;</code></pre><p id="464eb12d-11e3-439b-9aaf-572adc115e0c" class="">
+</p><blockquote id="8326fe81-b6c4-41a4-8a5a-2ba0187c9cf6" class="">TAREA con constantes. Realizar la operación matemática para sacar el descuento “#%” de un producto. Deberán diseñar una sección en <strong>html</strong> en donde existan al menos 5 componentes (cartas de producto) en donde se muestre una imagen, el nombre del producto, precio y descuento. El algoritmo deberá realizar la operación para obtener el descuento dependiendo el precio que tenga el producto,</blockquote><p id="7b3465c0-409b-4607-8e10-4d60cd06c50a" class="">
+</p><h1 id="50031b6c-f6f2-46e0-8285-82b497288368" class="">Definición de Matriz.</h1><p id="a26282a6-a7b9-44d3-9704-59b4894d382e" class="">Una matriz es una estructura de datos que puede contener varios valores o elementos. Se puede ver como una colección de elementos dispuestos en filas y columnas. Cada elemento en una matriz tiene una posición única, especificada por un conjunto de índices.</p><h2 id="9a13a517-5b76-4b60-a13d-0ae28273ae36" class="">Representación de Matrices en PHP.</h2><h3 id="fcb46574-03c3-42b3-b525-3538173bfcea" class=""><strong>Matrices Indexadas:</strong></h3><p id="b1fe8c71-94a4-4613-8578-8460c7a87cf2" class="">las matrices indexadas se utilizan cuando necesitas <strong><mark class="highlight-yellow_background">almacenar datos de manera estructurada y acceder a ellos mediante un índice numérico. </mark></strong></p><p id="d591eead-29b6-49fb-be09-550dfe56c741" class=""><strong>Utilidad:</strong></p><p id="d555be3f-7fb0-4edc-bac9-fc63e86eff77" class=""><strong>Listas o colecciones ordenadas:</strong> Almacenar y acceder a elementos en una lista o colección ordenada, como una lista de compras o nombres de estudiantes.</p><pre id="6fa9af9f-2d3b-498e-8d26-f085d286b5dd" class="code"><code>$shoppingList = array(&quot;Apples&quot;, &quot;Bananas&quot;, &quot;Bread&quot;);
+echo $shoppingList[1]; // Muestra &quot;Bananas&quot;</code></pre><p id="17ecf6f8-9830-428b-ac13-ecb0f0c8a96f" class="">
+</p><p id="1a8fae7b-8646-491f-9200-ad182f166ca4" class=""><strong>Iteración a través de elementos</strong>: Cuando necesitas recorrer y manipular cada elemento de una lista de manera secuencial.</p><pre id="c592bbaa-6013-41ef-9598-5477b385a96a" class="code"><code>$colors = array(&quot;Red&quot;, &quot;Green&quot;, &quot;Blue&quot;);
+foreach ($colors as $color) {
+    echo $color . &quot; &quot;;
+}
+// Muestra: Red Green Blue</code></pre><p id="35672ef9-eec7-489b-9aa0-18f4836c38b4" class="">
+</p><p id="8c26b23b-489d-4feb-9501-d650ad9cc860" class="">A<strong>lmacenamiento de datos tabulares simples</strong>: Para representar datos tabulares simples, como una matriz bidimensional para almacenar información de estudiantes (por ejemplo, nombres y edades).</p><pre id="4f079192-3583-414b-8d90-f46ae898ab8f" class="code"><code>$students = array(
+    array(&quot;John&quot;, 20),
+    array(&quot;Jane&quot;, 22),
+    array(&quot;Doe&quot;, 21)
+);
+
+echo $students[0][0]; // Muestra &quot;John&quot;</code></pre><p id="bbd06afc-83aa-49bc-9bd9-914b70d23849" class="">
+</p><p id="69f671bc-5851-483a-a10d-dc3a313ca83a" class=""><strong>Manejo de datos secuenciales:</strong> Cuando necesitas mantener un orden específico para los datos y acceder a ellos de acuerdo con su posición.</p><pre id="7acdf45c-3b36-4e95-a967-ce5940caba97" class="code"><code>$months = array(&quot;January&quot;, &quot;February&quot;, &quot;March&quot;);
+echo $months[2]; // Muestra &quot;March&quot;</code></pre><h3 id="8f9121c1-c127-42af-8e59-36a46fe3a84c" class="">Sintaxis básica.</h3><ul id="d7f27a4b-9fa2-470d-aa90-2daec75ac255" class="bulleted-list"><li style="list-style-type:disc">Cada elemento de la matriz tiene un índice numérico.</li></ul><ul id="39196d17-61ab-40a9-8a4c-2b687aa2f6c8" class="bulleted-list"><li style="list-style-type:disc">El índice comienza desde 0 y se incrementa en 1 para cada elemento.</li></ul><pre id="5a789789-e75f-48c9-9b74-2416ef87828b" class="code"><code>$matrizIndexada = array(valor1, valor2, valor3);</code></pre><pre id="6f58f98d-d6f1-44cd-a815-debdbb1d54b1" class="code"><code>// Construccion de una matriz indexada
+$matrizIndexada = array(&quot;Manzana&quot;, &quot;Banana&quot;, &quot;Cereza&quot;);</code></pre><p id="3f9b76eb-bedc-48da-a600-5722c1ac743b" class="">
+</p><h2 id="45e11e9a-dcaf-4d21-89e4-b53ac002b311" class="">Ejemplo practico.</h2><pre id="f21a1ad7-d8c1-4a29-938c-368324726f72" class="code"><code>//Cálculo con Matrices Indexadas
+// Aquí se define una matriz bidimensional
+// llamada $matriz. Esta matriz tiene 3 filas y 3 columnas
+// y cada elemento de la matriz es un número entero.
+
+$matriz = array(
+    array(1, 2, 3),
+    array(4, 5, 6),
+    array(7, 8, 9)
+);
+</code></pre><pre id="1cc3c9cf-83da-4b1c-ac6d-a9bc4422f6fa" class="code"><code>// 1.- Se inicializa una variable $sumaDiagonal en 0.
+// 2.- Luego, hay un bucle for que itera sobre las filas de
+// la matriz.
+// 3.- En cada iteración, se agrega el valor de la
+		// posición actual en la diagonal principal (la posición $i, $i)
+		// a la variable $sumaDiagonal.
+$sumaDiagonal = 0;
+for ($i = 0; $i &lt; count($matriz); $i++) {
+    $sumaDiagonal += $matriz[$i][$i];
+}</code></pre><pre id="fd91e16d-e70d-447a-ac4d-126b19c6d6bf" class="code"><code>// Finalmente, se imprime en pantalla el resultado de
+// la suma de la diagonal principal.
+echo &quot;La suma de la diagonal principal es: $sumaDiagonal&quot;;</code></pre><p id="1df4c5fa-5d8e-4f60-9abc-81fb2f122ca3" class="">
+</p><h3 id="85ca2643-68bf-40b5-be37-48242b586132" class=""><strong>Matrices Asociativas:</strong></h3><p id="0f35112b-356a-45a8-9e37-fe73e9aa7841" class="">Una matriz asociativa es un tipo de matriz en la que <mark class="highlight-yellow_background"><strong>cada elemento está asociado con un nombre o una clave en lugar de un índice numérico. </strong></mark>Cada par clave-valor en la matriz está formado por dos partes: la clave que a<mark class="highlight-yellow_background"><strong>ctúa como un identificador y el valor asociado a esa clave</strong></mark>. Esto proporciona una forma más descriptiva de trabajar con datos en comparación con las matrices indexadas.</p><h3 id="8ffcd4d3-06bf-4151-bbe8-4e246149d273" class="">Sintaxis basica.</h3><pre id="148d0307-dfba-42b2-a2ae-bdbfbf852c41" class="code"><code>// Cada elemento tiene un par clave-valor,
+// donde la clave es una cadena que actúa como un identificador único.
+
+// Este tipo de matriz es similar a un
+// diccionario en otros lenguajes de programación.
+$matrizAsociativa = array(&quot;clave1&quot; =&gt; valor1, &quot;clave2&quot; =&gt; valor2, &quot;clave3&quot; =&gt; valor3);</code></pre><ul id="b95fcfb4-d573-4c6a-9cdd-f8d1f29c3063" class="bulleted-list"><li style="list-style-type:disc">Cada elemento tiene un par clave-valor, donde la clave es una cadena que actúa como un identificador único.</li></ul><ul id="d919ce7a-e9f5-4ecf-91b0-1644ef2f1f75" class="bulleted-list"><li style="list-style-type:disc">Este tipo de matriz es similar a un diccionario en otros lenguajes de programación.</li></ul><pre id="313042fc-9eef-4af9-8558-644c3e285961" class="code"><code>$persona = array(
+    &quot;nombre&quot; =&gt; &quot;Juan&quot;,
+    &quot;edad&quot; =&gt; 25,
+    &quot;ciudad&quot; =&gt; &quot;Ejemplo City&quot;
+);</code></pre><p id="a3c8d78c-dccc-4223-8de8-b0b9b248fe4d" class="">
+</p><p id="fb1d7a10-49b5-43f9-b3da-196b2532484a" class=""><strong>Cuándo usar Matrices Asociativas:</strong></p><p id="654fa69e-94b3-4971-88ef-35d325ee3b4a" class=""><strong>Datos estructurados:</strong> Utiliza matrices asociativas cuando necesites representar datos estructurados con etiquetas descriptivas. Por ejemplo, información de un usuario con claves como &quot;nombre&quot;, &quot;edad&quot; y &quot;correo electrónico&quot;.</p><pre id="33f8f208-023d-4a16-8f28-452a286b4b99" class="code"><code>$usuario = array(
+    &quot;nombre&quot; =&gt; &quot;Ana&quot;,
+    &quot;edad&quot; =&gt; 30,
+    &quot;email&quot; =&gt; &quot;ana@example.com&quot;
+);</code></pre><p id="69d6632d-caff-47a0-a8bc-1dcbb29d94ae" class="">
+</p><p id="06509b1f-03e5-4ddd-9233-e3be6803f601" class=""><strong>Configuraciones y opciones</strong>: Cuando estás trabajando con configuraciones o opciones que tienen nombres descriptivos. Esto facilita la comprensión del propósito de cada configuración.</p><pre id="bcf757f7-dddf-4b34-92c5-79e24f361287" class="code"><code>$configuracion = array(
+    &quot;color_fondo&quot; =&gt; &quot;azul&quot;,
+    &quot;tamano_fuente&quot; =&gt; 14,
+    &quot;tema&quot; =&gt; &quot;claro&quot;
+);</code></pre><p id="d05b5149-f64c-4974-8114-4d75533970cb" class="">
+</p><p id="178ad4f3-97b6-4697-81f9-fdac71c09db0" class=""><strong>Respuestas de bases de datos</strong>: Cuando recuperas datos de una base de datos y cada campo tiene un nombre asociado. Las claves en la matriz asociativa pueden coincidir con los nombres de las columnas en la base de datos.</p><pre id="d1b13be7-5146-44f7-9bec-c79b7a25b04c" class="code"><code>$fila = array(
+    &quot;id&quot; =&gt; 1,
+    &quot;nombre&quot; =&gt; &quot;Carlos&quot;,
+    &quot;puntuacion&quot; =&gt; 85
+);</code></pre><p id="8b9f41ca-6e51-4317-a97a-404b6bd06b2a" class="">
+</p><p id="94e97440-0ed4-4a78-90b7-03979853a43e" class=""><strong>Iteración con claves descriptivas</strong>: Útil cuando necesitas iterar a través de la matriz y quieres acceder tanto a las claves como a los valores.</p><pre id="8a58d9f1-45a7-4e06-99b5-9ac903e27718" class="code"><code>foreach ($usuario as $clave =&gt; $valor) {
+    echo $clave . &quot;: &quot; . $valor . &quot;&lt;br&gt;&quot;;
+}
+// Muestra:
+// nombre: Ana
+// edad: 30
+// email: ana@example.com</code></pre><p id="9d830ec7-c099-408b-8ec9-7c81e3c0b860" class="">
+</p><h1 id="02a3fee7-1721-46c8-b538-2d1534047da9" class="">Switch / Case.</h1><p id="a7f952ee-9f05-4335-9cab-4ee7fe26397c" class="">Switch y Case son <mark class="highlight-yellow_background"><strong>estructuras de control</strong></mark> en PHP que permiten realizar acciones diferentes según el valor de una expresión. <mark class="highlight-yellow_background"><strong>Es una alternativa más limpia y eficiente a una serie de declaraciones</strong></mark> if-else anidadas cuando se desea comparar una variable con varios valores posibles.</p><h3 id="74dad75e-c456-4170-87b7-0d9a4533ac61" class="">Sintaxis basica.</h3><pre id="ecfacc2f-d6b3-4cf7-864f-bda0d1765956" class="code"><code>$variable = valor_a_evaluar;
+
+switch ($variable) {
+    case valor1:
+        // Acciones a realizar si $variable es igual a valor1
+        break;
+    case valor2:
+        // Acciones a realizar si $variable es igual a valor2
+        break;
+    // Puedes tener tantos casos como desees
+    default:
+        // Acciones a realizar si ninguno de los casos anteriores coincide
+}</code></pre><div id="45e3b895-cc3d-4c31-b4f1-64ebe1cb7ec6" class="column-list"><div id="67aa61b4-a285-4597-9208-ead9d6d58ed9" style="width:50%" class="column"><h3 id="a0e9176e-54b8-4e23-a571-418f88783fdc" class="">Funcionamiento:</h3><ol type="1" id="606b0326-9a71-4d89-b4d9-aa585e38b865" class="numbered-list" start="1"><li>La expresión entre paréntesis después de switch se evalúa <mark class="highlight-yellow_background"><strong>una vez.</strong></mark></li></ol><ol type="1" id="4e4951fb-3d21-453e-ba0c-9bf863bae60f" class="numbered-list" start="2"><li>Cada case compara el valor de la expresión con el valor del case.</li></ol><ol type="1" id="1eb06b99-c054-467e-aaef-30d66206e269" class="numbered-list" start="3"><li>Si hay una coincidencia, se ejecutan las acciones dentro de ese case.</li></ol><ol type="1" id="dee47eac-fe6a-4048-9d0b-b9b502a82fd3" class="numbered-list" start="4"><li>La palabra clave break se usa para salir del switch después de que se ejecuta un case.</li></ol><ol type="1" id="7da4f418-138e-4254-b129-8759c25e67ad" class="numbered-list" start="5"><li>Si no hay coincidencias, se ejecuta el default (si está presente).</li></ol><p id="89ac5af1-154d-44d2-a1c1-b358f7362cab" class="">
+</p></div><div id="d79dfe8f-b32d-4e50-92dc-3ee693b5cc24" style="width:50%" class="column"><h3 id="273dfe5a-c7de-43e3-9214-6b101305fe7a" class="">Cuándo Usar:</h3><ul id="44d9c516-4580-496d-9fa2-c382e37e7190" class="bulleted-list"><li style="list-style-type:disc">Múltiples condiciones para una variable: Cuando necesitas comparar una variable con varios valores y realizar acciones diferentes según el valor.</li></ul><ul id="3ef0d03a-5521-44ba-bc3a-c4bb27b776fc" class="bulleted-list"><li style="list-style-type:disc">Código más legible: Puede hacer que tu código sea más fácil de entender en comparación con múltiples declaraciones if-else.</li></ul></div></div><h3 id="b3cfac4e-27e6-41d8-aa30-588094eff88f" class="">Ejemplo practico.</h3><pre id="0a574e87-ed2f-4d8b-8bcf-c20c6100a804" class="code"><code>$opcion = 2;
+
+switch ($opcion) {
+    case 1:
+        echo &quot;Seleccionaste la opción 1.&quot;;
+        break;
+    case 2:
+        echo &quot;Seleccionaste la opción 2.&quot;;
+        break;
+    case 3:
+        echo &quot;Seleccionaste la opción 3.&quot;;
+        break;
+    default:
+        echo &quot;Opción no válida.&quot;;
+}</code></pre><p id="cabc341b-2d15-468e-9aa1-dca1c0fa8bac" class="">
+</p><blockquote id="aafb4410-7c9c-4e48-a5d0-3b3d8216a613" class="">Dependiendo del valor de $opcion, se ejecutará el bloque de código correspondiente. Es especialmente útil cuando tienes varias opciones y no deseas escribir una serie de if-else consecutivos.</blockquote><p id="f21ce339-8e55-40ba-ad87-4642aa8d90b1" class="">
+</p><p id="44c6b098-d6f9-44d6-8fbc-accc98211c6f" class="">Tarea: Realizar un algoritmo que tenga la funcionalidad de convertir n cantidad de centimetros a pulgadas y viceversa. El algoritmo debera estar realizado con la estructura de control Switch / Case.</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
